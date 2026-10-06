@@ -1,0 +1,843 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>GD's Asphalt Inc.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../img/logo2.png" type="image/png" />
+    <style>
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background-color: rgb(128, 55, 196);
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.03);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .animate-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease-out;
+        }
+
+            .animate-in.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        .navbar {
+            background-color: rgb(128, 55, 196);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: flex-end;
+            border-bottom: 2px solid black;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+            .navbar a {
+                text-decoration: none;
+                color: white;
+                font-weight: bold;
+                font-size: 15px;
+                margin-left: 25px;
+            }
+
+        section {
+            padding: 55px 20px;
+            box-sizing: border-box;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .cornerlogo {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 150px;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        #home {
+            background-color: rgb(128, 55, 196);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .home-left {
+            margin-left: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .moto {
+            font-size: 48px;
+            line-height: 1.4;
+            white-space: pre-wrap;
+            font-weight: bold;
+            color: white;
+            margin: 80px;
+        }
+        .safty {
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 16px;
+            background-color: rebeccapurple;
+
+        }
+        .im{
+            width:100px;
+            height: 100px;
+            
+        }
+        .safty-img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        .mainlogo {
+            width: 750px;
+            height: auto;
+            margin-right: 50px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+            .mainlogo:hover {
+                animation: pulse 1s ease-in-out infinite;
+            }
+
+        .home-buttons {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        button {
+            color: white;
+            background-color: rebeccapurple;
+            border-radius: 16px;
+            font-weight: bold;
+            height: 75px;
+            width: 185px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+            button:hover {
+                background-color: indigo;
+                transform: scale(1.05);
+                box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+            }
+
+            button a {
+                color: white;
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+                width: 100%;
+                font-size: 16px;
+            }
+
+        #about {
+            background-color: rgb(128, 55, 196);
+        }
+
+            #about .section-wrapper {
+                display: flex;
+                align-items: flex-start;
+                justify-content: center;
+                gap: 80px;
+                padding: 40px;
+                flex-wrap: wrap;
+            }
+
+        .abphoto {
+            width: 750px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .para {
+            background-color: red;
+            color: white;
+            border-radius: 16px;
+            border: 3px solid black;
+            padding: 25px;
+            max-width: 500px;
+            line-height: 1.6;
+            font-size: 20px;
+        }
+
+            .para h3 {
+                margin-top: 0;
+                font-size: 1.5rem;
+            }
+
+        #services {
+            background-color: rgb(128, 55, 196);
+            color: black;
+        }
+
+            #services .section-wrapper {
+                max-width: 1200px;
+                margin: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 40px;
+                position: relative;
+            }
+
+            #services h1 {
+                align-self: flex-start;
+                margin-bottom: 10px;
+                font-size: 50px;
+                color: white;
+            }
+
+        .services-grid {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .service-card {
+            flex: 1 1 30%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+            border-radius: 25px;
+            border: 3px solid red;
+            padding: 60px 20px 20px;
+            box-sizing: border-box;
+            text-align: center;
+            position: relative;
+            min-width: 250px;
+            transition: transform 0.3s ease-in-out;
+            margin-bottom: 40px;
+        }
+
+            .service-card:hover {
+                transform: scale(1.03);
+            }
+
+            .service-card img {
+                width: 225px;
+                height: auto;
+                border-radius: 20px;
+                position: absolute;
+                top: -50px;
+                transform: translateY(-50%);
+                background: white;
+                padding: 5px;
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            }
+
+            .service-card h2 {
+                margin-top: 60px;
+                margin-bottom: 20px;
+                color: black;
+            }
+
+            .service-card button {
+                background-color: rebeccapurple;
+                color: white;
+                border: none;
+                border-radius: 16px;
+                padding: 15px 20px;
+                cursor: pointer;
+                font-weight: bold;
+                font-size: 14px;
+            }
+
+                .service-card button:hover {
+                    background-color: indigo;
+                }
+
+                .service-card button a {
+                    color: white;
+                    text-decoration: none;
+                }
+        .slidshow {
+            position: relative;
+            width: 90%;
+            max-width: 600px;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+
+        .slide {
+            height: 500px;
+            border: 12px solid red;
+            border-radius: 30px;
+            background-color: white;
+            padding: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+            .slide img {
+                width: 100%;
+                border-radius: 12px;
+            }
+
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 12px;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            border-radius: 50%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 10;
+            user-select: none;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        .dot-container {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .dot {
+            cursor: pointer;
+            height: 12px;
+            width: 12px;
+            margin: 0 4px;
+            background-color: white;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+
+            .active, .dot:hover {
+                background-color: #F26522;
+            }
+
+        .sum-section {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .sum-img {
+            width: 600px;
+            height: 500px;
+            border: 12px solid red;
+            border-radius: 30px;
+            background-color: white;
+            padding: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .sum-box {
+            background-color: red;
+            color: white;
+            border: 2px solid black;
+            border-radius: 16px;
+            padding: 30px;
+            height: 500px;
+            max-width: 500px;
+            line-height: 1.8;
+            font-size: 22px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+            .sum-box h2 {
+                margin-top: 0;
+            }
+
+        .info {
+            background-color: red;
+            border: 2px solid black;
+            border-radius: 16px;
+            padding: 30px;
+            font-size: 22px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            height: 500px;
+            max-width: 500px;
+        }
+
+        #asphalt, #piping, #demolition, #contact {
+            background-color: rgb(128, 55, 196);
+            color: white;
+        }
+
+            #contact .section-wrapper {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 40px;
+                padding: 40px;
+                flex-wrap: wrap;
+            }
+
+            #contact .info {
+                order: 2;
+                max-width: 500px;
+                flex: 1 1 400px;
+                background-color: red;
+                border: 2px solid black;
+                border-radius: 16px;
+                padding: 30px;
+                font-size: 22px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+                color: white;
+                height: auto;
+            }
+
+            #contact .section-wrapper {
+                flex-wrap: wrap;
+                gap: 40px;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #contact .mainlogo {
+                order: 1;
+                flex: 1 1 400px;
+                max-width: 750px;
+                height: auto;
+            }
+
+        @media (max-width: 1024px) {
+            .mainlogo, .abphoto, .sum-img {
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+            }
+
+            .home-left {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .home-buttons {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .sum-box, .info {
+                max-width: 100%;
+                height: auto;
+            }
+
+            .navbar {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+                .navbar a {
+                    margin: 10px;
+                    font-size: 14px;
+                }
+
+            .moto {
+                font-size: 32px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .services-grid {
+                flex-direction: column;
+                align-items: center;
+                gap: 250px; 
+            }
+
+            .service-card {
+                width: 100%;
+                margin-bottom: 0; 
+            }
+        }
+
+
+        @media (max-width: 768px) {
+            .services-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .service-card {
+                width: 100%;
+                flex: unset;
+            }
+
+            .section-wrapper {
+                flex-direction: column !important;
+                align-items: center !important;
+            }
+
+            .para {
+                max-width: 100%;
+                font-size: 16px;
+            }
+
+            .sum-section {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cornerlogo {
+                width: 100px;
+                bottom: 10px;
+                right: 10px;
+            }
+            .mainlogo, .abphoto, .sum-img {
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+            }
+
+        }
+
+        @media (max-width: 480px) {
+            button {
+                height: 60px;
+                width: 100%;
+                font-size: 14px;
+            }
+
+            .service-card h2 {
+                font-size: 20px;
+            }
+            .navbar {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .navbar a {
+                font-size: 14px;
+            }
+
+            .sum-box, .info {
+                font-size: 18px;
+                padding: 20px;
+            }
+
+            .mainlogo {
+                width: 100%;
+                max-width: 90vw;
+            }
+
+            .moto {
+                font-size: 24px;
+                white-space: normal;
+            }
+            .mainlogo, .abphoto, .sum-img {
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+            }
+
+        }
+
+        @media (max-width: 360px) {
+            .cornerlogo {
+                padding: 20px;
+                width: 80px;
+            }
+            .mainlogo, .abphoto, .sum-img {
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+            }
+
+
+            .home-buttons {
+                width: 100%;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#asphalt">Asphalt</a>
+        <a href="#piping">Piping</a>
+        <a href="#demolition">Demolition</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <section id="home" class="animate-in">
+        <div class="home-left">
+            <pre class="moto">
+"Quality You 
+ Can Trust, 
+ Safety You
+ Can Rely On."
+      </pre>
+
+            <div class="safty">
+                <pre>
+    NEQ:1173994329
+    RBQ:5763-4982-01
+    CCQ:815-117
+    Mohawk self insurance
+    Kahnawake lebor office (contractor certificate)     
+    ACRGTQ-(2018)
+                </pre>
+            </div>
+            <div class="home-buttons">
+                <button><a href="#services">See Our Services</a></button>
+                <button><a href="#contact">Contact Here</a></button>
+            </div>
+        </div>
+        <img src="../img/logo2.png" alt="logo" class="mainlogo" />
+        <img src="../img/cornergb.png" alt="corner logo" class="cornerlogo" />
+    </section>
+
+    <section id="about" class="animate-in">
+        <div class="section-wrapper">
+            <img src="../img/about.png" alt="location photo" class="abphoto" />
+            <div class="para">
+                <h3>About Us</h3>
+                <p>
+                    She:kom \ Hello! We at GD Asphalt are based in Kahnawake on the south shore of Montreal.<br><br>
+                    Our team is composed of Kanienkeha:ka people, and we value teamwork deeply. As we say, “Kanikonhriiohtshera” — the teaching of the good mind — is something we bring to every job and experience.<br><br>
+                    With over 25 years of experience, we proudly serve the greater Montreal area. Our commitment to quality means long-lasting, smooth, and beautiful asphalt surfaces.<br><br>
+                    We offer bilingual service, free estimates, and 24/7 emergency repairs. You can count on our craftsmanship and reliable service.<br><br>
+                    Nia:wen (Thank you).
+                </p>
+            </div>
+        </div>
+       
+        <img src="../img/cornergb.png" alt="corner logo" class="cornerlogo" />
+    </section>
+
+    <section id="services" class="animate-in">
+        <div class="section-wrapper">
+            <h1>Our Services</h1>
+            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+            <div class="services-grid">
+                <div class="service-card">
+                    <img src="../img/asphalt.png" alt="Asphalt photo" />
+                    <h2>ASPHALT</h2>
+                    <button><a href="#asphalt">FIND OUT MORE</a></button>
+                </div>
+                <div class="service-card">
+                    <img src="../img/piping.png" alt="Piping photo" />
+                    <h2>PIPING</h2>
+                    <button><a href="#piping">FIND OUT MORE</a></button>
+                </div>
+                <div class="service-card">
+                    <img src="../img/demo.png" alt="Demolition photo" />
+                    <h2>DEMOLITION</h2>
+                    <button><a href="#demolition">FIND OUT MORE</a></button>
+                </div>
+            </div>
+        </div>
+        <img src="../img/cornergb.png" alt="corner logo" class="cornerlogo" />
+    </section>
+
+
+    <section id="asphalt" class="animate-in">
+        <div class="sum-section">
+            <div class="slidshow" id="asphaltSlides">
+                <div class="slide"><img src="../img/asphalt2.png" alt="Asphalt 1" height="500"></div>
+                <div class="slide"><img src="../img/ashpaltlared(1).png" alt="Asphalt 2" height="500"></div>
+                <div class="slide"><img src="../img/ashpaltfin.png" alt="Asphalt 3" height="500"></div>
+                <div class="slide"><img src="../img/standphotoed.png" alt="Asphalt 4" height="500"></div>
+                <a class="prev" onclick="plusSlides(-1, 0)">❮</a>
+                <a class="next" onclick="plusSlides(1, 0)">❯</a>
+            </div>
+            <div class="dot-container" id="asphaltSlidesDots">
+                <span class="dot" onclick="currentSlide(1, 0)"></span>
+                <span class="dot" onclick="currentSlide(2, 0)"></span>
+                <span class="dot" onclick="currentSlide(3, 0)"></span>
+                <span class="dot" onclick="currentSlide(4, 0)"></span>
+            </div>
+
+            <div class="sum-box">
+                <h2>Asphalt</h2>
+                <p>
+                    If there is one thing we do not skimp on, it's the quality of our asphalt installation.
+                    We guarantee the quality of our services, which deliver premium work.
+                    Whether for a residential driveway, commercial parking, or road access,
+                    our asphalt professionals are at your disposal to offer you, not only the best asphalt
+                    but also the satisfaction of a job well done.
+                </p>
+            </div>
+        </div>
+        <br />
+            <img src="../img/cornergb.png" alt="corner logo" class="cornerlogo" />
+</section>
+
+    <section id="piping" class="animate-in">
+        <div class="sum-section">
+
+            <div class="slidshow" id="pipingSlides">
+                <div class="slide"><img src="../img/piping2.png" alt="Piping 1" height="500"></div>
+                <div class="slide"><img src="../img/pippingfined.png" alt="Piping 2" height="500"></div>
+                <div class="slide"><img src="../img/pippinged.png" alt="Piping 3" height="500"></div>
+                <div class="slide"><img src="../img/pipingfored.png" alt="Piping 4" height="500"></div>
+                <a class="prev" onclick="plusSlides(-1, 1)">❮</a>
+                <a class="next" onclick="plusSlides(1, 1)">❯</a>
+            </div>
+            <div class="dot-container" id="pipingSlidesDots">
+                <span class="dot" onclick="currentSlide(1, 1)"></span>
+                <span class="dot" onclick="currentSlide(2, 1)"></span>
+                <span class="dot" onclick="currentSlide(3, 1)"></span>
+                <span class="dot" onclick="currentSlide(4, 1)"></span>
+            </div>
+
+            <div class="sum-box">
+                <h2>Piping</h2>
+                <p>
+                    Our team members take great pride in the quality of pipe products produced in our facility over time.
+                    Pipelines comprise pipes, fittings, valves, and control instruments that regulate the flow of fluids and gases
+                    used in industrial operations. Our process piping systems and solutions are designed to meet the temperature,
+                    pressure, size, and chemical compatibility requirements of chemical processing systems and other industrial applications.
+                </p>
+            </div>
+        </div>
+        <br />
+        <img src="../img/cornergb.png" alt="corner logo" class="cornerlogo" />
+    </section>
+
+    <section id="demolition" class="animate-in">
+        <div class="sum-section">
+             <img src="../img/demo.png" alt="Demolition photo" class="sum-img" />
+
+            
+            <div class="sum-box">
+                <h2>Demolition</h2>
+                <p>
+                    With a focus on efficiency, integrity, and quality, we ensure that every project aligns with your future business goals.
+                    Our environmentally friendly approach reflects our commitment to sustainability, which sets us apart from our competitors.
+                    With our support, your industrial operations will continue uninterrupted and grow.
+                </p>
+            </div>
+        </div>
+        <br />
+        <img src="../img/cornergb.png" alt="corner logo" class="cornerlogo" />
+    </section>
+
+    <section id="contact" class="animate-in">
+        <div class="section-wrapper">
+            <img src="../img/logo2.png" alt="logo" class="mainlogo" />
+            <div class="info">
+                <h2>Contact Info</h2>
+                <h3>JEAN DENIS PAYANT</h3>
+                <p>514-44-4367</p>
+
+                <h3>KRISTY TAYLOR</h3>
+                <p>514-444-4375</p>
+
+                <h3>EMAIL</h3>
+                <p>asphalteg.dinc@gmail.com</p>
+
+                <h3>ADDRESS</h3>
+                <p>1Route/HWY 132 CP Box 298 Kahnawake, QC J0L 1B0</p>
+            </div>
+        </div>
+        <img src="../img/cornergb.png" alt="corner logo" class="cornerlogo" />
+    </section>
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
+
+        let slideIndices = [1, 1]; // [Asphalt, Piping]
+        let slideIds = ["asphaltSlides", "pipingSlides"];
+
+        function showSlides(n, no) {
+            let slides = document.querySelectorAll(`#${slideIds[no]} .slide`);
+            let dots = document.querySelectorAll(`#${slideIds[no]}Dots .dot`);
+
+            if (n > slides.length) slideIndices[no] = 1;
+            if (n < 1) slideIndices[no] = slides.length;
+
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+
+            slides[slideIndices[no] - 1].style.display = "block";
+            dots[slideIndices[no] - 1].className += " active";
+        }
+
+        function plusSlides(n, no) {
+            showSlides(slideIndices[no] += n, no);
+        }
+
+        function currentSlide(n, no) {
+            showSlides(slideIndices[no] = n, no);
+        }
+
+        // Initialize both slideshows
+        showSlides(1, 0);
+        showSlides(1, 1);
+
+    </script>
+
+</body>
+</html>
